@@ -97,6 +97,8 @@ impl fmt::Display for Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
+        utils::set_panic_hook();
+
         let width = 64;
         let height = 64;
 
@@ -119,5 +121,18 @@ impl Universe {
 
     pub fn render(&self) -> String {
         self.to_string()
+    }
+}
+
+#[wasm_bindgen]
+impl Universe {
+    pub fn width(&self) -> u32 {
+        self.width
+    }
+    pub fn height(&self) -> u32 {
+        self.height
+    }
+    pub fn cells(&self) -> *const Cell {
+        self.cells.as_ptr()
     }
 }
